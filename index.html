@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Might Not Workshop · Coming soon</title>
+  <meta name="description" content="A new, free drama and media group for young people in Teesside. Coming soon.">
+
+  <!-- Social sharing previews -->
+  <meta property="og:title" content="The Might Not Workshop">
+  <meta property="og:description" content="This might not work. Coming soon anyway. Free drama and media for young people in Teesside.">
+  <meta property="og:type" content="website">
+  <!-- <meta property="og:image" content="https://[YOUR-DOMAIN]/share-image.png"> -->
+
+  <!-- Favicon: the red dot -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='%23D62718'/%3E%3C/svg%3E">
+
+  <!-- Brand fonts (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:wght@400;700&family=Courier+Prime:wght@400;700&family=Permanent+Marker&display=swap">
+
+  <style>
+    /* ---------- Brand tokens ---------- */
+    :root {
+      --paper: #F4F0E6;
+      --ink: #161616;
+      --red: #D62718;        /* edit red: marks, headings, the dot */
+      --red-text: #D62718;   /* red used for marker text */
+      --tape: #E3D3A8;
+      --field: #FFFFFF;
+
+      --font-head: "Archivo Black", "Arial Black", sans-serif;
+      --font-body: "Atkinson Hyperlegible", Arial, sans-serif;
+      --font-label: "Courier Prime", "Courier New", monospace;
+      --font-marker: "Permanent Marker", "Comic Sans MS", cursive;
+
+      color-scheme: light dark;
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #161616;
+        --ink: #F4F0E6;
+        --red-text: #FF6B5B; /* lighter red so marker text stays readable on dark */
+        --field: #222222;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: inherit; }
+
+    html { background: var(--paper); }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 1.125rem;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-underline-offset: 0.15em; }
+    a:hover { color: var(--red-text); }
+
+    :focus-visible {
+      outline: 3px solid var(--red-text);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      max-width: 70rem;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4.5rem;
+    }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 2rem;
+    }
+    .tape {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--tape);
+      color: #161616; /* tape is always light, so text stays ink */
+      padding: 0.6rem 1.75rem;
+      transform: rotate(-2deg);
+      clip-path: polygon(0 0, 100% 0, 97% 25%, 100% 50%, 97% 75%, 100% 100%, 0 100%, 3% 75%, 0 50%, 3% 25%);
+      text-decoration: none;
+    }
+    .tape__name { font-family: var(--font-head); font-size: 1.9rem; line-height: 1; }
+    .tape__rec { font-family: var(--font-label); font-size: 0.8rem; font-weight: 700; }
+    .dot {
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: var(--red);
+    }
+    .status {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { display: flex; flex-direction: column; gap: 1.5rem; }
+    .hero h1 {
+      margin: 0;
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: clamp(3.2rem, 11vw, 8.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .circled { position: relative; display: inline-block; }
+    .circled::after {
+      content: "";
+      position: absolute;
+      left: -0.18em;
+      top: -0.12em;
+      right: -0.2em;
+      bottom: -0.06em;
+      border: 0.06em solid var(--red);
+      border-radius: 50%;
+      transform: rotate(-5deg);
+      pointer-events: none;
+    }
+    .marker {
+      margin: 0;
+      align-self: flex-end;
+      font-family: var(--font-marker);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--red-text);
+      transform: rotate(-4deg);
+    }
+
+    /* ---------- Intro + sign-up ---------- */
+    .intro {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+    .intro__text {
+      flex: 3 1 26rem;
+      min-width: 0;
+      max-width: 40rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .intro__text p { margin: 0; font-size: clamp(1.25rem, 2.4vw, 1.6rem); line-height: 1.45; }
+
+    .signup {
+      flex: 2 1 20rem;
+      min-width: 0;
+      border: 3px solid var(--ink);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .signup h2 {
+      margin: 0;
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+    }
+    .signup label { font-weight: 700; }
+    .signup input {
+      font: inherit;
+      padding: 0.8rem 0.9rem;
+      min-height: 48px;
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      background: var(--field);
+      color: var(--ink);
+      width: 100%;
+    }
+    .signup button {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      padding: 0.9rem 1rem;
+      min-height: 48px;
+      border: 0;
+      border-radius: 0;
+      background: var(--ink);
+      color: var(--paper);
+      cursor: pointer;
+    }
+    .signup button:hover { background: var(--red); color: #FFFFFF; }
+    .signup .small { margin: 0; font-size: 1rem; line-height: 1.45; }
+    .signup .message { margin: 0; font-weight: 700; }
+    .signup .message:empty { display: none; }
+
+    /* ---------- Points ---------- */
+    .points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 2rem;
+      border-top: 3px solid var(--ink);
+      padding-top: 2.5rem;
+    }
+    .points h3 {
+      margin: 0 0 0.5rem;
+      font-family: var(--font-head);
+      font-weight: 400;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+    .points p { margin: 0; line-height: 1.5; }
+
+    /* ---------- Footer ---------- */
+    .site-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      border-top: 1px solid var(--ink);
+      padding: 1.5rem 0 2.5rem;
+      font-family: var(--font-label);
+      font-size: 0.95rem;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header class="site-header">
+      <a class="tape" href="/" aria-label="The Might Not Workshop, home">
+        <span class="tape__name">TMNW</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span class="tape__rec">REC</span>
+      </a>
+      <p class="status" style="margin:0">Tape 000: in pre-production</p>
+    </header>
+
+    <main style="display: flex; flex-direction: column; gap: 4.5rem">
+
+      <section class="hero" aria-labelledby="headline">
+        <h1 id="headline">This might <span class="circled">not</span> work.</h1>
+        <p class="marker">coming soon anyway</p>
+      </section>
+
+      <section class="intro">
+        <div class="intro__text">
+          <p>The Might Not Workshop is a new drama and media group for young people in Teesside. We’ll make theatre, film and media together, try things out, and share what we make, finished or not.</p>
+          <p>No experience needed. First sessions start [DATE].</p>
+        </div>
+
+        <!--
+          SIGN-UP FORM
+          This form is not connected to anything yet. To collect emails:
+          1. Set up a mailing list or form service and copy its form "action" URL.
+          2. Paste it into action="" below, and check the email field's name matches what the service expects.
+          3. Link the Privacy notice below to TMNW's published privacy notice.
+          Until an action is set, the small script at the bottom stops the form sending and shows a message.
+        -->
+        <form class="signup" action="" method="post" novalidate>
+          <h2>Get updates</h2>
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          <button type="submit">Keep me posted</button>
+          <p class="message" role="status" aria-live="polite"></p>
+          <p class="small">Under 16? Ask a parent or carer to sign up for you. We only use your email to tell you about TMNW. <a href="[PRIVACY-NOTICE-URL]">Privacy notice</a></p>
+        </form>
+      </section>
+
+      <section class="points" aria-label="About TMNW">
+        <div>
+          <h3>Free</h3>
+          <p>Taking part in sessions will always be free.</p>
+        </div>
+        <div>
+          <h3>Your ideas, your work</h3>
+          <p>Young people decide what we make, and own what they create.</p>
+        </div>
+        <div>
+          <h3>Want to help?</h3>
+          <p>We’re looking for volunteers and board members. Email <a href="mailto:[CONTACT-EMAIL]">[CONTACT-EMAIL]</a></p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <span>The Might Not Workshop. Community interest company in formation.</span>
+      <a href="mailto:mark@themightnotworkshop.co.uk">mark@themightnotworkshop.co.uk</a>
+    </footer>
+
+  </div>
+
+  <script>
+    // Checks the email and, while no form service is connected, stops the form from sending.
+    (function () {
+      var form = document.querySelector(".signup");
+      var input = form.querySelector("#email");
+      var message = form.querySelector(".message");
+
+      form.addEventListener("submit", function (event) {
+        if (!input.value || !input.checkValidity()) {
+          event.preventDefault();
+          message.textContent = "Enter an email address, like name@example.com.";
+          input.focus();
+          return;
+        }
+        if (!form.getAttribute("action")) {
+          event.preventDefault();
+          message.textContent = "Sign-up opens soon. Check back here for updates.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
