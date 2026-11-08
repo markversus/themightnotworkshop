@@ -8,7 +8,7 @@
 
   <!-- Social sharing previews -->
   <meta property="og:title" content="The Might Not Workshop">
-  <meta property="og:description" content="This might not work. Coming soon anyway. Free drama and media for young people in Teesside.">
+  <meta property="og:description" content="This group might not work. Coming soon anyway. Free drama and media for young people in Teesside.">
   <meta property="og:type" content="website">
   <!-- <meta property="og:image" content="https://[YOUR-DOMAIN]/share-image.png"> -->
 
@@ -124,6 +124,12 @@
       line-height: 0.92;
       letter-spacing: -0.01em;
       text-transform: uppercase;
+    }
+    .marker-word {
+      font-family: var(--font-marker);
+      color: var(--red-text);
+      text-transform: lowercase;
+      letter-spacing: 0;
     }
     .circled { position: relative; display: inline-block; }
     .circled::after {
@@ -250,7 +256,7 @@
   <div class="wrap">
 
     <header class="site-header">
-      <a class="tape" href="http://www.themightnotworkshop.co.uk" aria-label="The Might Not Workshop, home">
+      <a class="tape" href="/" aria-label="The Might Not Workshop, home">
         <span class="tape__name">TMNW</span>
         <span class="dot" aria-hidden="true"></span>
         <span class="tape__rec">REC</span>
@@ -261,28 +267,29 @@
     <main style="display: flex; flex-direction: column; gap: 4.5rem">
 
       <section class="hero" aria-labelledby="headline">
-        <h1 id="headline">This <span style="font-family: 'Permanent Marker', 'Comic Sans MS';color:#FF6B5B">GROUP</span> might <span class="circled">not</span> work.</h1>
+        <h1 id="headline">This <span class="marker-word">group</span> might <span class="circled">not</span> work.</h1>
         <p class="marker">coming soon anyway</p>
       </section>
 
       <section class="intro">
         <div class="intro__text">
-          <p>The Might Not Workshop is a new creative group for young people in Redcar & Cleveland. We’ll make theatre, film and media together, try things out, and share what we make, finished or not.</p>
-          <p>No experience needed. First sessions coming in 2027.</p>
+          <p>The Might Not Workshop is a new drama and media group for young people in Teesside. We’ll make theatre, film and media together, try things out, and share what we make, finished or not.</p>
+          <p>No experience needed. First sessions coming 2027.</p>
         </div>
 
         <!--
           SIGN-UP FORM
-          This form is not connected to anything yet. To collect emails:
-          1. Set up a mailing list or form service and copy its form "action" URL.
-          2. Paste it into action="" below, and check the email field's name matches what the service expects.
-          3. Link the Privacy notice below to TMNW's published privacy notice.
+          MAILCHIMP SIGN-UP FORM
+          Connected to the TMNW Mailchimp audience. The action URL and the hidden spam-trap
+          field (b_...) come from Mailchimp's embedded form code. Do not remove the spam trap.
           Until an action is set, the small script at the bottom stops the form sending and shows a message.
         -->
-        <form class="signup" action="" method="post" novalidate>
+        <form class="signup" action="https://themightnotworkshop.us9.list-manage.com/subscribe/post?u=27e9e306b10788c20ace5735e&amp;id=bca05697a7&amp;f_id=009f57e1f0" method="post" novalidate>
           <h2>Get updates</h2>
           <label for="email">Email address</label>
-          <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+          <input id="email" name="EMAIL" type="email" autocomplete="email" required placeholder="you@example.com">
+          <!-- Mailchimp spam trap: real people never fill this in -->
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_27e9e306b10788c20ace5735e_bca05697a7" tabindex="-1" value=""></div>
           <button type="submit">Keep me posted</button>
           <p class="message" role="status" aria-live="polite"></p>
           <p class="small">Under 16? Ask a parent or carer to sign up for you. We only use your email to tell you about TMNW. <a href="privacy.html">Privacy notice</a></p>
@@ -327,7 +334,8 @@
           input.focus();
           return;
         }
-        if (!form.getAttribute("action")) {
+        var action = form.getAttribute("action") || "";
+        if (!action || action.charAt(0) === "[") {
           event.preventDefault();
           message.textContent = "Sign-up opens soon. Check back here for updates.";
         }
